@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Data attributes are only used for the JS below and not needed for the CSS or React code -->
+    <button data-custom-open>Show Custom Modal</button>
+    <br />
+    <button data-dialog-open>Show Dialog Modal</button>
+
+    <dialog>
+      <p>This is a <strong>DIALOG</strong> modal</p>
+      <button>Close</button>
+    </dialog>
+
+    <div class="modal-overlay">
+      <div class="modal">
+        <p>This is a <strong>CUSTOM</strong> modal</p>
+        <button>Close</button>
+      </div>
+    </div>
+
+    <script>
+      // Dialog JS
+      const openDialogBtn = document.querySelector("[data-dialog-open]")
+      const closeDialogBtn = document.querySelector("dialog > button")
+      const dialog = document.querySelector("dialog")
+
+      openDialogBtn.addEventListener("click", () => {
+        dialog.showModal()
+      })
+
+      closeDialogBtn.addEventListener("click", () => {
+        dialog.close()
+      })
+
+      // Custom JS
+      const openCustomBtn = document.querySelector("[data-custom-open]")
+      const closeCustomBtn = document.querySelector(".modal > button")
+      const customModalOverlay = document.querySelector(".modal-overlay")
+
+      openCustomBtn.addEventListener("click", () => {
+        customModalOverlay.classList.add("show")
+      })
+
+      closeCustomBtn.addEventListener("click", () => {
+        customModalOverlay.classList.remove("show")
+      })
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape") {
+          customModalOverlay.classList.remove("show")
+        }
+      })
+    </script>
+  </body>
+</html>
