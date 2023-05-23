@@ -3,7 +3,6 @@ import { createPortal } from "react-dom"
 
 export function DialogModal({ isOpen, onClose, children }) {
   const dialogRef = useRef(null)
-
   useEffect(() => {
     const dialog = dialogRef.current
     if (dialog == null) return
@@ -18,6 +17,7 @@ export function DialogModal({ isOpen, onClose, children }) {
   useEffect(() => {
     const dialog = dialogRef.current
     if (dialog == null) return
+
     dialog.addEventListener("close", onClose)
 
     return () => {

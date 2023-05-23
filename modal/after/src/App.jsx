@@ -1,31 +1,39 @@
-import { DialogModal } from "./DialogModal"
-import { CustomModal } from "./CustomModal"
 import { useState } from "react"
-import "./styles.css"
+import { CustomModal } from "./CustomModal"
+import { DialogModal } from "./DialogModal"
 
 export default function App() {
-  const [isCustomOpen, setIsCustomOpen] = useState(false)
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isCustomModalOpen, setIsCustomModalOpen] = useState(false)
+  const [isDialogModalOpen, setIsDialogModalOpen] = useState(false)
 
   return (
-    <>
-      <button onClick={() => setIsCustomOpen(true)}>Open Custom Modal</button>
+    <div>
+      <button onClick={() => setIsCustomModalOpen(true)}>
+        Show Custom Modal
+      </button>
       <br />
-      <button onClick={() => setIsDialogOpen(true)}>Open Dialog Modal</button>
-
-      <CustomModal isOpen={isCustomOpen} onClose={() => setIsCustomOpen(false)}>
+      <button onClick={() => setIsDialogModalOpen(true)}>
+        Show Dialog Modal
+      </button>
+      <CustomModal
+        isOpen={isCustomModalOpen}
+        onClose={() => setIsCustomModalOpen(false)}
+      >
         <p>
           This is a <strong>CUSTOM</strong> modal
         </p>
-        <button onClick={() => setIsCustomOpen(false)}>Close</button>
+        <button onClick={() => setIsCustomModalOpen(false)}>Close</button>
       </CustomModal>
 
-      <DialogModal isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+      <DialogModal
+        isOpen={isDialogModalOpen}
+        onClose={() => setIsDialogModalOpen(false)}
+      >
         <p>
           This is a <strong>DIALOG</strong> modal
         </p>
-        <button onClick={() => setIsDialogOpen(false)}>Close</button>
+        <button onClick={() => setIsDialogModalOpen(false)}>Close</button>
       </DialogModal>
-    </>
+    </div>
   )
 }
