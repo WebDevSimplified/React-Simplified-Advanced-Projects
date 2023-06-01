@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
   addMonths,
   eachDayOfInterval,
@@ -10,18 +11,15 @@ import {
   startOfMonth,
   startOfWeek,
 } from "date-fns"
-import { useState } from "react"
-import classnames from "classnames"
 
 export function DatePicker({ value, onChange }) {
   const [isOpen, setIsOpen] = useState(false)
-
   return (
     <div className="date-picker-container">
       <button className="date-picker-button" onClick={() => setIsOpen(o => !o)}>
-        {value != null ? format(value, "MMM do, yyyy") : "Select a Date"}
+        {value == null ? "Select a Date" : format(value, "MMM do, yyyy")}
       </button>
-      {isOpen && <DatePickerModal value={value} onChange={onChange} />}
+      {isOpen && <DatePickerModal onChange={onChange} value={value} />}
     </div>
   )
 }
@@ -34,15 +32,15 @@ function DatePickerModal({ value, onChange }) {
     end: endOfWeek(endOfMonth(visibleMonth)),
   })
 
-  function showNextMonth() {
-    setVisibleMonth(currentMonth => {
-      return addMonths(currentMonth, 1)
-    })
-  }
-
   function showPreviousMonth() {
     setVisibleMonth(currentMonth => {
       return addMonths(currentMonth, -1)
+    })
+  }
+
+  function showNextMonth() {
+    setVisibleMonth(currentMonth => {
+      return addMonths(currentMonth, 1)
     })
   }
 
@@ -77,13 +75,13 @@ function DatePickerModal({ value, onChange }) {
       <div className="date-picker-grid-dates date-picker-grid">
         {visibleDates.map(date => (
           <button
-            key={date.toDateString()}
             onClick={() => onChange(date)}
-            className={classnames("date", {
-              "date-picker-other-month-date": !isSameMonth(date, visibleMonth),
-              selected: isSameDay(date, value),
-              today: isToday(date),
-            })}
+            className={`date ${
+              !isSameMonth(date, visibleMonth) && "date-picker-other-month-date"
+            } ${isSameDay(date, value) && "selected"} ${
+              isToday(date) && "today"
+            }`}
+            key={date.toDateString()}
           >
             {date.getDate()}
           </button>
