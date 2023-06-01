@@ -1,6 +1,6 @@
 # Before Getting Started
 
-Unlike the last project, this project will not actually use Portals. You could create this Date Picker with Portals, but it requires a lot of custom JavaScript and algebra to figure out how to position the calendar correctly, instead we will be using CSS to position the calendar which is much easier (even if it isn't quite as flexible).
+This project will not actually use Portals. You could create this Date Picker with Portals, but it requires a lot of custom JavaScript and algebra to figure out how to position the calendar correctly, instead we will be using CSS to position the calendar which is much easier (even if it isn't quite as flexible).
 
 Speaking of CSS, all the HTML/CSS you need for the project is included. Make sure you pay attention to all the classes in the HTML to make sure you include them all in your final project.
 
