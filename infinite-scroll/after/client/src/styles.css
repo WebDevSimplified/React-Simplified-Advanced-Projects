@@ -1,0 +1,30 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 1rem;
+}
+
+.grid > * {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+}
+
+.skeleton {
+  background-color: #ddd;
+  color: #aaa;
+  animation: skeleton 1s ease-in-out infinite alternate;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes skeleton {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
