@@ -1,0 +1,23 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.title:has(+ .subtitle) {
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+  display: block;
+}
+
+.title .btns {
+  font-size: 1.5rem;
+  font-weight: normal;
+}

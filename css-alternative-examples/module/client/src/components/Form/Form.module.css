@@ -1,0 +1,58 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-grow: 1;
+}
+
+.group input,
+.group select,
+.group textarea {
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid hsl(200, 100%, 10%);
+}
+
+.group textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.group input:focus,
+.group select:focus,
+.group textarea:focus {
+  outline: none;
+  border-color: hsl(200, 100%, 50%);
+}
+
+.group.error input,
+.group.error select,
+.group.error textarea {
+  border-color: hsl(0, 100%, 50%);
+}
+
+.group .errorMessage {
+  color: hsl(0, 100%, 50%);
+  font-size: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+}
+
+.row :global(.btn) {
+  align-self: flex-end;
+}
+
+.btnRow {
+  justify-content: flex-end;
+}

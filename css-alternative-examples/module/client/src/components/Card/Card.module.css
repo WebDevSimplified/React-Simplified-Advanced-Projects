@@ -1,0 +1,45 @@
+.card {
+  --padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  font-size: 2rem;
+  padding: var(--padding);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-transform: capitalize;
+  border-bottom: 1px solid black;
+  flex-shrink: 0;
+}
+
+.body {
+  padding: var(--padding);
+  flex-grow: 1;
+}
+
+.footer {
+  border-top: 1px solid black;
+  display: flex;
+  padding: var(--padding);
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

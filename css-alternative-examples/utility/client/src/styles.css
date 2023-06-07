@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  @apply p-2 rounded-lg border-2 border-slate-900;
+}
+
+.form-group textarea {
+  @apply resize-y;
+  min-height: 150px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  @apply border-sky-500 outline-none;
+}
+
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+  @apply border-red-500;
+}
+
+.loading-spinner {
+  @apply fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  width: 200px;
+  height: 200px;
+}
+
+.loading-spinner::after,
+.loading-spinner::before {
+  @apply absolute w-full h-full rounded-full mix-blend-multiply;
+  content: "";
+  border: 20px solid transparent;
+}
+
+.loading-spinner::before {
+  @apply border-t-sky-500;
+  animation: spin infinite 2s ease-in-out;
+}
+
+.loading-spinner::after {
+  @apply border-b-sky-500;
+  animation: spin infinite 1.25s ease-in;
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
