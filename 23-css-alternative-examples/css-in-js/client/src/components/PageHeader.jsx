@@ -5,7 +5,7 @@ const StyledTitle = styled.h1`
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  margin-bottom: ${props => (props.subtitle ? "2rem" : "1rem")};
+  margin-bottom: ${props => (props.hasSubtitle ? "1rem" : "2rem")};
   gap: 2rem;
 `
 
@@ -23,7 +23,7 @@ const StyledBtns = styled.div`
 export function PageHeader({ children, btnSection, subtitle }) {
   return (
     <>
-      <StyledTitle>
+      <StyledTitle hasSubtitle={subtitle != null}>
         {children}
         {btnSection && <StyledBtns>{btnSection}</StyledBtns>}
       </StyledTitle>

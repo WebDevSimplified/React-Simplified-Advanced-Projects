@@ -2,8 +2,8 @@ export function PageHeader({ children, btnSection, subtitle }) {
   return (
     <>
       <h1
-        className={`text-5xl flex justify-between items-center mb-8 gap-8 font-bold ${
-          subtitle ? "mb-4" : ""
+        className={`text-5xl flex justify-between items-center gap-8 font-bold ${
+          subtitle ? "mb-4" : "mb-8"
         }`}
       >
         {children}
