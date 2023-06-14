@@ -1,0 +1,455 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+:root {
+  --blue-background: hsl(200, 80%, 50%);
+  --red-background: hsl(0, 75%, 60%);
+  --green-background: hsl(150, 80%, 30%);
+  --border-color: #dadce0;
+  --border-size: 1px;
+  --day-padding: 0.25rem;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.calendar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #333;
+}
+
+.header {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header > * {
+  margin-right: 0.5rem;
+}
+
+.header > :last-child {
+  margin-right: 0;
+}
+
+.btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 250ms;
+  color: #333;
+}
+
+.btn:hover {
+  background-color: #f1f3f4;
+}
+
+.btn.btn-delete {
+  border-color: hsl(0, 75%, 60%);
+  background-color: hsl(0, 75%, 95%);
+  color: hsl(0, 75%, 10%);
+}
+
+.btn.btn-delete:hover {
+  background-color: hsl(0, 75%, 90%);
+}
+
+.btn.btn-success {
+  border-color: hsl(150, 80%, 30%);
+  background-color: hsl(150, 80%, 95%);
+  color: hsl(150, 80%, 10%);
+}
+
+.btn.btn-success:hover {
+  background-color: hsl(150, 80%, 90%);
+}
+
+.close-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  width: 2rem;
+  padding: 0;
+  height: 2rem;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 100%;
+  transition: background-color 250ms;
+  color: #333;
+}
+
+.close-btn:hover {
+  background-color: #eaeaea;
+}
+
+.month-change-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  width: 2rem;
+  padding: 0;
+  height: 2rem;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 100%;
+  transition: background-color 250ms;
+  color: #333;
+}
+
+.month-change-btn:hover {
+  background-color: #f1f3f4;
+}
+
+.month-change-btn:first-child {
+  margin-right: -0.5rem;
+}
+
+.month-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.days {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-auto-rows: minmax(100px, 1fr);
+  background-color: var(--border-color);
+  gap: var(--border-size);
+  padding: var(--border-size);
+}
+
+.day {
+  background-color: white;
+  padding: var(--day-padding);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.non-month-day {
+  opacity: 0.75;
+}
+
+.old-month-day .events,
+.old-month-day .day-header {
+  opacity: 0.5;
+}
+
+.day-header {
+  margin-bottom: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.week-name {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #777;
+}
+
+.day-number {
+  font-size: 0.9rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.day-number.today {
+  background-color: var(--blue-background);
+  border-radius: 50%;
+  color: white;
+}
+
+.day:hover .add-event-btn,
+.add-event-btn:focus {
+  opacity: 1;
+}
+
+.add-event-btn {
+  opacity: 0;
+  position: absolute;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  top: 0;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.add-event-btn:hover {
+  background-color: #f1f3f4;
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: none;
+  width: 100%;
+  border: none;
+  font-size: 1rem;
+  padding: 0;
+}
+
+.all-day-event {
+  color: white;
+  padding: 0.15rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.all-day-event .event-name {
+  overflow: hidden;
+}
+
+.event > * {
+  margin-right: 0.5rem;
+}
+
+.event > :last-child {
+  margin-right: 0;
+}
+
+.event-time {
+  color: #777;
+}
+
+.color-dot {
+  border-radius: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  flex-shrink: 0;
+}
+
+.color-dot.blue,
+.all-day-event.blue {
+  background-color: var(--blue-background);
+}
+
+.color-dot.red,
+.all-day-event.red {
+  background-color: var(--red-background);
+}
+
+.color-dot.green,
+.all-day-event.green {
+  background-color: var(--green-background);
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.events-view-more-btn {
+  border: none;
+  background: none;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+  width: 100%;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .overlay {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  animation: fade-in 250ms forwards;
+}
+
+.modal.closing .overlay {
+  animation: fade-in 250ms forwards reverse;
+}
+
+@keyframes fade-in {
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.modal .modal-body {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  z-index: 1;
+  min-width: 300px;
+  max-width: 95%;
+  animation: pop-in 250ms forwards;
+  scale: 0;
+}
+
+.modal.closing .modal-body {
+  animation: pop-in 250ms forwards reverse;
+}
+
+@keyframes pop-in {
+  100% {
+    scale: 1;
+  }
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title > * {
+  margin-right: 0.25rem;
+}
+
+.modal-title > :last-child {
+  margin-right: 0;
+}
+
+.modal-title > small {
+  color: #555;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group.checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.form-group.checkbox input {
+  cursor: pointer;
+  margin-right: 0;
+}
+
+.form-group.checkbox label {
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.form-group input {
+  padding: 0.25rem 0.5rem;
+}
+
+.row {
+  display: flex;
+}
+
+.row > * {
+  flex-grow: 1;
+  flex-basis: 0;
+  margin-right: 0.5rem;
+}
+
+.row > :last-child {
+  margin-right: 0;
+}
+
+.row.left > * {
+  flex-grow: 0;
+}
+
+.sr-only {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+  display: block;
+}
+
+.color-radio {
+  position: absolute;
+  opacity: 0;
+  left: -9999px;
+}
+
+.color-radio + label::before {
+  content: "";
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  opacity: 0.25;
+}
+
+.color-radio:checked + label::before {
+  opacity: 1;
+}
+
+.color-radio:focus + label::before {
+  outline: 1px solid black;
+}
+
+.color-radio[value="blue"] + label::before {
+  background-color: var(--blue-background);
+}
+
+.color-radio[value="red"] + label::before {
+  background-color: var(--red-background);
+}
+
+.color-radio[value="green"] + label::before {
+  background-color: var(--green-background);
+}

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Calendar</title>
+  </head>
+  <body>
+    <div id="root">
+      <div class="calendar">
+        <div class="header">
+          <button class="btn">Today</button>
+          <div>
+            <button class="month-change-btn">&lt;</button>
+            <button class="month-change-btn">&gt;</button>
+          </div>
+          <span class="month-title">June 2023</span>
+        </div>
+        <div class="days">
+          <div class="day non-month-day old-month-day">
+            <div class="day-header">
+              <div class="week-name">Sun</div>
+              <div class="day-number">28</div>
+              <button class="add-event-btn">+</button>
+            </div>
+            <div class="events">
+              <button class="all-day-event blue event">
+                <div class="event-name">Short</div>
+              </button>
+              <button class="all-day-event green event">
+                <div class="event-name">
+                  Long Event Name That Just Keeps Going
+                </div>
+              </button>
+              <button class="event">
+                <div class="color-dot blue"></div>
+                <div class="event-time">7am</div>
+                <div class="event-name">Event Name</div>
+              </button>
+            </div>
+          </div>
+          <div class="day non-month-day old-month-day">
+            <div class="day-header">
+              <div class="week-name">Mon</div>
+              <div class="day-number">29</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day non-month-day old-month-day">
+            <div class="day-header">
+              <div class="week-name">Tue</div>
+              <div class="day-number">30</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day non-month-day old-month-day">
+            <div class="day-header">
+              <div class="week-name">Wed</div>
+              <div class="day-number">31</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="week-name">Thu</div>
+              <div class="day-number">1</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="week-name">Fri</div>
+              <div class="day-number">2</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="week-name">Sat</div>
+              <div class="day-number">3</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="week-name">Sun</div>
+              <div class="day-number">4</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="day-number">5</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="day-number">6</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="day-number">7</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="day-number">8</div>
+              <button class="add-event-btn">+</button>
+            </div>
+            <div class="events">
+              <button class="all-day-event blue event">
+                <div class="event-name">Short</div>
+              </button>
+              <button class="all-day-event red event">
+                <div class="event-name">
+                  Long Event Name That Just Keeps Going
+                </div>
+              </button>
+              <button class="event">
+                <div class="color-dot red"></div>
+                <div class="event-time">7am</div>
+                <div class="event-name">Event Name</div>
+              </button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="day-number">9</div>
+              <button class="add-event-btn">+</button>
+            </div>
+            <div class="events">
+              <button class="all-day-event green event">
+                <div class="event-name">Short</div>
+              </button>
+              <button class="event">
+                <div class="color-dot blue"></div>
+                <div class="event-time">7am</div>
+                <div class="event-name">Event Name</div>
+              </button>
+              <button class="event">
+                <div class="color-dot green"></div>
+                <div class="event-time">8am</div>
+                <div class="event-name">Event Name</div>
+              </button>
+              <button class="event">
+                <div class="color-dot blue"></div>
+                <div class="event-time">9am</div>
+                <div class="event-name">Event Name</div>
+              </button>
+              <button class="event">
+                <div class="color-dot blue"></div>
+                <div class="event-time">10am</div>
+                <div class="event-name">Event Name</div>
+              </button>
+              <button class="event">
+                <div class="color-dot red"></div>
+                <div class="event-time">11am</div>
+                <div class="event-name">Event Name</div>
+              </button>
+            </div>
+            <button class="events-view-more-btn">+2 More</button>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="day-number">10</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="day-number">11</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="day-number">12</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day old-month-day">
+            <div class="day-header">
+              <div class="day-number">13</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number today">14</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">15</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">16</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">17</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">18</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">19</div>
+              <button class="add-event-btn">+</button>
+            </div>
+            <div class="events">
+              <button class="all-day-event blue event">
+                <div class="event-name">Short</div>
+              </button>
+              <button class="all-day-event blue event">
+                <div class="event-name">
+                  Long Event Name That Just Keeps Going
+                </div>
+              </button>
+              <button class="event">
+                <div class="color-dot blue"></div>
+                <div class="event-time">7am</div>
+                <div class="event-name">Event Name</div>
+              </button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">20</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">21</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">22</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">23</div>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">24</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">25</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">26</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">27</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">28</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">29</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day">
+            <div class="day-header">
+              <div class="day-number">30</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+          <div class="day non-month-day">
+            <div class="day-header">
+              <div class="day-number">1</div>
+              <button class="add-event-btn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="modal">
+        <div class="overlay"></div>
+        <div class="modal-body">
+          <div class="modal-title">
+            6/8/23
+            <button class="close-btn">&times;</button>
+          </div>
+          <div class="events">
+            <button class="all-day-event green event">
+              <div class="event-name">Short</div>
+            </button>
+            <button class="event">
+              <div class="color-dot blue"></div>
+              <div class="event-time">7am</div>
+              <div class="event-name">Event Name</div>
+            </button>
+            <button class="event">
+              <div class="color-dot green"></div>
+              <div class="event-time">8am</div>
+              <div class="event-name">Event Name</div>
+            </button>
+            <button class="event">
+              <div class="color-dot blue"></div>
+              <div class="event-time">9am</div>
+              <div class="event-name">Event Name</div>
+            </button>
+            <button class="event">
+              <div class="color-dot blue"></div>
+              <div class="event-time">10am</div>
+              <div class="event-name">Event Name</div>
+            </button>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="modal">
+        <div class="overlay"></div>
+        <div class="modal-body">
+          <div class="modal-title">
+            <div>Add Event</div>
+            <small>6/8/23</small>
+            <button class="close-btn">&times;</button>
+          </div>
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" />
+            </div>
+            <div class="form-group checkbox">
+              <input type="checkbox" name="all-day" id="all-day" />
+              <label for="all-day">All Day?</label>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label for="start-time">Start Time</label>
+                <input type="time" name="start-time" id="start-time" />
+              </div>
+              <div class="form-group">
+                <label for="end-time">End Time</label>
+                <input type="time" name="end-time" id="end-time" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Color</label>
+              <div class="row left">
+                <input
+                  type="radio"
+                  name="color"
+                  value="blue"
+                  id="blue"
+                  checked
+                  class="color-radio"
+                  data-color
+                />
+                <label for="blue"><span class="sr-only">Blue</span></label>
+                <input
+                  type="radio"
+                  name="color"
+                  value="red"
+                  id="red"
+                  class="color-radio"
+                  data-color
+                />
+                <label for="red"><span class="sr-only">Red</span></label>
+                <input
+                  type="radio"
+                  name="color"
+                  value="green"
+                  id="green"
+                  class="color-radio"
+                  data-color
+                />
+                <label for="green"><span class="sr-only">Green</span></label>
+              </div>
+            </div>
+            <div class="row">
+              <button class="btn btn-success" type="submit">Add</button>
+              <button class="btn btn-delete" type="button">Delete</button>
+            </div>
+          </form>
+        </div>
+      </div> -->
+    </div>
+  </body>
+</html>
