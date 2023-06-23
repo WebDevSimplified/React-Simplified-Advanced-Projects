@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react"
 import { UnionOmit } from "../utils/types"
-import { EVENT_COLORS } from "./useEvents"
+import { EVENT_COLORS } from "./useEvent"
 
 export type Event = {
   id: string
@@ -8,22 +8,14 @@ export type Event = {
   color: (typeof EVENT_COLORS)[number]
   date: Date
 } & (
-  | {
-      allDay: false
-      startTime: string
-      endTime: string
-    }
-  | {
-      allDay: true
-      startTime?: never
-      endTime?: never
-    }
+  | { allDay: false; startTime: string; endTime: string }
+  | { allDay: true; startTime?: never; endTime?: never }
 )
 
-export type EventsContext = {
+type EventsContext = {
   events: Event[]
-  updateEvent: (id: string, eventDetails: UnionOmit<Event, "id">) => void
   addEvent: (event: UnionOmit<Event, "id">) => void
+  updateEvent: (id: string, eventDetails: UnionOmit<Event, "id">) => void
   deleteEvent: (id: string) => void
 }
 
@@ -36,24 +28,24 @@ type EventsProviderProps = {
 export function EventsProvider({ children }: EventsProviderProps) {
   const [events, setEvents] = useLocalStorage("EVENTS", [])
 
+  function addEvent(eventDetails: UnionOmit<Event, "id">) {
+    setEvents(e => [...e, { ...eventDetails, id: crypto.randomUUID() }])
+  }
+
   function updateEvent(id: string, eventDetails: UnionOmit<Event, "id">) {
-    setEvents(events => {
-      return events.map(event =>
-        event.id === id ? { id, ...eventDetails } : event
-      )
+    setEvents(e => {
+      return e.map(event => {
+        return event.id === id ? { id, ...eventDetails } : event
+      })
     })
   }
 
-  function addEvent(event: UnionOmit<Event, "id">) {
-    setEvents(events => [...events, { ...event, id: crypto.randomUUID() }])
-  }
-
   function deleteEvent(id: string) {
-    setEvents(events => events.filter(event => event.id !== id))
+    setEvents(e => e.filter(event => event.id !== id))
   }
 
   return (
-    <Context.Provider value={{ events, updateEvent, addEvent, deleteEvent }}>
+    <Context.Provider value={{ events, addEvent, updateEvent, deleteEvent }}>
       {children}
     </Context.Provider>
   )
@@ -61,9 +53,10 @@ export function EventsProvider({ children }: EventsProviderProps) {
 
 function useLocalStorage(key: string, initialValue: Event[]) {
   const [value, setValue] = useState<Event[]>(() => {
-    const value = localStorage.getItem(key)
-    if (value == null) return initialValue
-    return (JSON.parse(value) as Event[]).map(event => {
+    const jsonValue = localStorage.getItem(key)
+    if (jsonValue == null) return initialValue
+
+    return (JSON.parse(jsonValue) as Event[]).map(event => {
       if (event.date instanceof Date) return event
       return { ...event, date: new Date(event.date) }
     })

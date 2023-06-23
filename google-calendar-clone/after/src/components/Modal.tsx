@@ -1,14 +1,14 @@
-import { ReactNode, useLayoutEffect, useRef, useState } from "react"
-import { useEffect } from "react"
+import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
+import { cc } from "../utils/cc"
 
 export type ModalProps = {
+  children: ReactNode
   isOpen: boolean
   onClose: () => void
-  children: ReactNode
 }
 
-export function Modal({ isOpen, onClose, children }: ModalProps) {
+export function Modal({ children, isOpen, onClose }: ModalProps) {
   const [isClosing, setIsClosing] = useState(false)
   const prevIsOpen = useRef<boolean>()
 
@@ -28,6 +28,7 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
     if (!isOpen && prevIsOpen.current) {
       setIsClosing(true)
     }
+
     prevIsOpen.current = isOpen
   }, [isOpen])
 
@@ -35,8 +36,8 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
 
   return createPortal(
     <div
-      onAnimationEnd={isClosing ? () => setIsClosing(false) : undefined}
-      className={`modal ${isClosing ? "closing" : ""}`}
+      onAnimationEnd={() => setIsClosing(false)}
+      className={cc("modal", isClosing && "closing")}
     >
       <div className="overlay" onClick={onClose} />
       <div className="modal-body">{children}</div>
