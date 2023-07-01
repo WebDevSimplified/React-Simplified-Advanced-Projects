@@ -1,9 +1,9 @@
-import { routes } from "../src/routes"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { render } from "@testing-library/react"
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { routes } from "../src/routes"
 
 export function renderRoute(route = "/") {
-  window.history.pushState({}, "Test page", route)
+  window.history.pushState({}, "Test Page", route)
 
   return render(<RouterProvider router={createBrowserRouter(routes)} />)
 }

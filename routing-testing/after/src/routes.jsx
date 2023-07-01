@@ -12,6 +12,7 @@ export const routes = [
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: import.meta.env.MODE === "test" ? <ErrorPage /> : undefined,
     children: [
       {
         errorElement: <ErrorPage />,
@@ -51,6 +52,9 @@ export const routes = [
 
 function ErrorPage() {
   const error = useRouteError()
+  if (import.meta.env.MODE === "test") {
+    throw error
+  }
 
   return (
     <>
