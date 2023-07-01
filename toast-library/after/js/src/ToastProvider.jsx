@@ -8,24 +8,29 @@ const DEFAULT_OPTIONS = {
   autoDismissTimeout: 5000,
   position: "top-right",
 }
+
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([])
 
-  function addToast(text, { id = crypto.randomUUID(), ...userOptions } = {}) {
-    const options = { ...DEFAULT_OPTIONS, ...userOptions }
-    setToasts(prevToasts => {
-      return [...prevToasts, { text, id, options }]
+  function addToast(
+    text,
+    { id = crypto.randomUUID(), ...userDefinedOptions } = {}
+  ) {
+    const options = { ...DEFAULT_OPTIONS, ...userDefinedOptions }
+    setToasts(currentToasts => {
+      return [...currentToasts, { text, options, id }]
     })
 
     if (options.autoDismiss) {
       setTimeout(() => removeToast(id), options.autoDismissTimeout)
     }
+
     return id
   }
 
   function removeToast(id) {
-    setToasts(prevToasts => {
-      return prevToasts.filter(toast => toast.id !== id)
+    setToasts(currentToasts => {
+      return currentToasts.filter(toast => toast.id !== id)
     })
   }
 
@@ -35,6 +40,7 @@ export function ToastProvider({ children }) {
       grouped[position] = []
     }
     grouped[position].push(toast)
+
     return grouped
   }, {})
 
@@ -46,9 +52,9 @@ export function ToastProvider({ children }) {
           <div key={position} className={`toast-container ${position}`}>
             {toasts.map(toast => (
               <Toast
-                key={toast.id}
-                text={toast.text}
                 remove={() => removeToast(toast.id)}
+                text={toast.text}
+                key={toast.id}
               />
             ))}
           </div>
