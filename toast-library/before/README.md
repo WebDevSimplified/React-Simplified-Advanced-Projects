@@ -16,3 +16,4 @@ The starting code for this project is a simple HTML file that shows how to rende
    - `autoDismiss`: a boolean that determines if the toast should automatically dismiss itself after a certain amount of time
    - `autoDismissTimeout`: the amount of time in milliseconds that the toast should wait before dismissing itself if `autoDismiss` is true
    - `position`: the position on the screen where the toast should appear (`top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, `bottom-right`)
+3. Toast messages should remove themselves when clicked
