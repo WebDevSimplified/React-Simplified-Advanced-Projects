@@ -7,6 +7,8 @@ export default function App() {
   const inputRef = useRef(null)
 
   function createToast() {
+    if (inputRef.current == null) return
+
     setLastToastId(
       addToast(inputRef.current.value, {
         autoDismiss: false,

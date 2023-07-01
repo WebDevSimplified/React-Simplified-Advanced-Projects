@@ -1,7 +1,7 @@
 import { createContext, useState } from "react"
 import { createPortal } from "react-dom"
 
-export const ToastContext = createContext()
+export const ToastContext = createContext(null)
 
 const DEFAULT_OPTIONS = {
   autoDismiss: true,
