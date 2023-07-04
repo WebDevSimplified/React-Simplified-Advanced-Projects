@@ -68,6 +68,7 @@ describe("Form component", () => {
     expect(passwordErrorMsg).toBeInTheDocument()
     expect(onSubmit).not.toHaveBeenCalledOnce()
 
+    await user.clear(passwordInput)
     await user.type(passwordInput, "Password123")
     expect(passwordErrorMsg).not.toBeInTheDocument()
   })
