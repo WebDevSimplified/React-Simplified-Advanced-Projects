@@ -1,6 +1,5 @@
 import { Router } from "express"
 import { zParse } from "../utils/zParse"
-import z from "zod"
 import { hashPassword, verifyPassword } from "../utils/passwordHasher"
 import { db } from "../db"
 import { loginSchema, signupSchema } from "../constants/schemas/users"

@@ -2,20 +2,15 @@ import { PageHeader } from "@/components/ui/PageHeader"
 import { Button } from "@/components/ui/button"
 import {
   MyJobListingGrid,
-  JobListing,
-  getAllMyListings,
+  JobListingSkeletonGrid,
 } from "@/features/job-listing"
-import { useEffect, useState } from "react"
+import { Await, useDeferredLoaderData } from "@/lib/reactRouter"
+import { Suspense } from "react"
 import { Link } from "react-router-dom"
+import { loader } from "./loader"
 
 export function MyJobListingsPage() {
-  const [jobListings, setJobListings] = useState<JobListing[]>([])
-
-  // TODO: Make loader
-  useEffect(() => {
-    getAllMyListings().then(setJobListings)
-  }, [])
-
+  const data = useDeferredLoaderData<typeof loader>()
   return (
     <>
       <PageHeader
@@ -29,7 +24,11 @@ export function MyJobListingsPage() {
       >
         My Job Listings
       </PageHeader>
-      <MyJobListingGrid jobListings={jobListings} />
+      <Suspense fallback={<JobListingSkeletonGrid />}>
+        <Await resolve={data.jobListings}>
+          {jobListings => <MyJobListingGrid jobListings={jobListings} />}
+        </Await>
+      </Suspense>
     </>
   )
 }

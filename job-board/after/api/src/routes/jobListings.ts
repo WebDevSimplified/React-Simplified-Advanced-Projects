@@ -11,9 +11,6 @@ import { stripe } from "../stripe"
 export const jobListingsRouter = Router()
 
 jobListingsRouter.get("/published", async (req, res) => {
-  // const query = await zParse(req.query, getAllSchema, res)
-  // if (query == null) return
-
   res.json(
     await db.jobListing.findMany({ where: { expiresAt: { gt: new Date() } } })
   )
@@ -53,8 +50,23 @@ jobListingsRouter.post("/", async (req, res) => {
 jobListingsRouter.post(
   "/:id/create-publish-payment-intent",
   async (req, res) => {
+    if (req.session.user?.id == null) {
+      res.status(401).json({ message: "You must be logged in to do that" })
+      return
+    }
+
     const body = await zParse(req.body, createPublishPaymentIntentSchema, res)
     if (body == null) return
+
+    const id = req.params.id
+    const jobListing = await db.jobListing.findFirst({
+      where: { id, postedById: req.session.user.id },
+    })
+
+    if (jobListing == null) {
+      res.status(404).json({ message: "Job listing not found" })
+      return
+    }
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: getJobListingPriceInCents(body.duration),
@@ -86,10 +98,24 @@ jobListingsRouter.get("/:id", async (req, res) => {
 })
 
 jobListingsRouter.put("/:id", async (req, res) => {
+  if (req.session.user?.id == null) {
+    res.status(401).json({ message: "You must be logged in to do that" })
+    return
+  }
+
   const body = await zParse(req.body, jobListingFormSchema, res)
   if (body == null) return
 
   const id = req.params.id
+  const jobListing = await db.jobListing.findFirst({
+    where: { id, postedById: req.session.user.id },
+  })
+
+  if (jobListing == null) {
+    res.status(404).json({ message: "Job listing not found" })
+    return
+  }
+
   const updatedJobListing = await db.jobListing.update({
     where: { id },
     data: body,
@@ -99,7 +125,20 @@ jobListingsRouter.put("/:id", async (req, res) => {
 })
 
 jobListingsRouter.delete("/:id", async (req, res) => {
+  if (req.session.user?.id == null) {
+    res.status(401).json({ message: "You must be logged in to do that" })
+    return
+  }
+
   const id = req.params.id
+  const jobListing = await db.jobListing.findFirst({
+    where: { id, postedById: req.session.user.id },
+  })
+
+  if (jobListing == null) {
+    res.status(404).json({ message: "Job listing not found" })
+    return
+  }
 
   await db.jobListing.delete({ where: { id } })
 

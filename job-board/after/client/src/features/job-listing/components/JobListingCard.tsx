@@ -10,8 +10,10 @@ import { Banknote, CalendarDays, GraduationCap } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { JobListing } from ".."
 import { formatCurrency } from "@/utils/formatters"
+import { cn } from "@/utils/shadcnUtils"
 
 type JobListingCardProps = {
+  className?: string
   headerDetails?: React.ReactNode
   footerBtns?: React.ReactNode
 } & Pick<
@@ -26,6 +28,7 @@ type JobListingCardProps = {
 >
 
 export function JobListingCard({
+  className,
   headerDetails,
   footerBtns,
   title,
@@ -37,7 +40,7 @@ export function JobListingCard({
   type: jobType,
 }: JobListingCardProps) {
   return (
-    <Card className="h-full flex flex-col">
+    <Card className={cn("h-full flex flex-col", className)}>
       <CardHeader>
         <div className="flex gap-4 justify-between">
           <div>

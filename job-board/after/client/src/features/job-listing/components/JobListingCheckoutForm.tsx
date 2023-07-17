@@ -41,7 +41,9 @@ export function JobListingCheckoutForm({
   return (
     <form onSubmit={onSubmit}>
       {errorMessage && (
-        <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+        <p className="text-red-500 dark:text-red-900 text-sm mb-4">
+          {errorMessage}
+        </p>
       )}
       <PaymentElement />
       <Button

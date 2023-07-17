@@ -6,6 +6,7 @@ export const env = createEnv({
   client: {
     VITE_API_URL: z.string().url(),
     VITE_STRIPE_PUBLISHABLE_KEY: z.string(),
+    VITE_TEST_SLOW_API: z.coerce.boolean().optional(),
   },
   isServer: false,
   runtimeEnv: import.meta.env,

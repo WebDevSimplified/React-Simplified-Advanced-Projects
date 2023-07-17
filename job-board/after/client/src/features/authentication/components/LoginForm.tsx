@@ -24,6 +24,7 @@ import {
 import { AxiosError } from "axios"
 import { useAuth } from ".."
 import { loginSchema } from "@backend/constants/schemas/users"
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner"
 
 type LoginFormValues = z.infer<typeof loginSchema>
 
@@ -40,7 +41,7 @@ export function LoginForm() {
   }
 
   async function onSubmit(values: LoginFormValues) {
-    login(values.email, values.password).catch(error => {
+    await login(values.email, values.password).catch(error => {
       if (
         error instanceof AxiosError &&
         error.response?.data?.message != null
@@ -57,7 +58,7 @@ export function LoginForm() {
           <CardHeader>
             <CardTitle>Log In</CardTitle>
             {form.formState.errors.root?.message && (
-              <CardDescription className="text-red-500">
+              <CardDescription className="text-red-500 dark:text-red-900">
                 {form.formState.errors.root.message}
               </CardDescription>
             )}
@@ -97,7 +98,12 @@ export function LoginForm() {
             <Button type="button" asChild variant="outline">
               <Link to="/signup">Sign up</Link>
             </Button>
-            <Button type="submit">Log In</Button>
+            <Button
+              type="submit"
+              disabled={form.formState.isSubmitting || !form.formState.isValid}
+            >
+              {form.formState.isSubmitting ? <LoadingSpinner /> : "Log In"}
+            </Button>
           </CardFooter>
         </Card>
       </form>

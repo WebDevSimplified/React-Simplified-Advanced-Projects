@@ -7,13 +7,15 @@ import {
   signup as signupService,
 } from "../services/authentication"
 import { useLocation, useNavigate } from "react-router-dom"
+import { LogoutDialog } from "../components/LogoutDialog"
 
 type AuthContext = {
   login: (email: string, password: string) => Promise<void>
   signup: (email: string, password: string) => Promise<void>
   logout: () => void
   isLoggedIn: boolean
-  readonly user?: User
+  isLoadingUser: boolean
+  user?: User
 }
 
 export const Context = createContext<AuthContext | null>(null)
@@ -24,11 +26,15 @@ type AuthProvider = {
 
 export function AuthProvider({ children }: AuthProvider) {
   const [user, setUser] = useState<User>()
+  const [isLoadingUser, setIsLoadingUser] = useState(true)
+  const [isLogOutModalOpen, setIsLogOutModalOpen] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
 
   useEffect(() => {
-    getLoggedInUser().then(setUser)
+    getLoggedInUser()
+      .then(setUser)
+      .finally(() => setIsLoadingUser(false))
   }, [])
 
   function login(email: string, password: string) {
@@ -46,14 +52,28 @@ export function AuthProvider({ children }: AuthProvider) {
   }
 
   function logout() {
-    return logoutService().then(() => setUser(undefined))
+    setIsLogOutModalOpen(true)
+    return logoutService()
+      .then(() => setUser(undefined))
+      .finally(() => setIsLogOutModalOpen(false))
   }
 
   return (
     <Context.Provider
-      value={{ user, login, signup, logout, isLoggedIn: user != null }}
+      value={{
+        user,
+        isLoadingUser,
+        login,
+        signup,
+        logout,
+        isLoggedIn: user != null,
+      }}
     >
       {children}
+      <LogoutDialog
+        isOpen={isLogOutModalOpen}
+        onOpenChange={setIsLogOutModalOpen}
+      />
     </Context.Provider>
   )
 }

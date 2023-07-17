@@ -5,14 +5,13 @@ import { ErrorPage } from "@/pages/ErrorPage"
 import { TaskListPage } from "@/pages/tasks/TaskListPage"
 import { NewTaskPage } from "@/pages/tasks/NewTaskPage"
 import { NotFoundPage } from "@/pages/NotFoundPage"
-import { JobListingsListPage } from "@/pages/jobListings/JobListingsListPage"
-import { NewJobListingPage } from "@/pages/jobListings/NewJobListingPage"
+import { jobListingRoute } from "@/pages/job-listings/index"
+import { NewJobListingPage } from "@/pages/job-listings/NewJobListingPage"
 import { PrivatePage } from "@/components/routing/PrivatePage"
 import { AuthLayout, LoginForm, SignupForm } from "./features/authentication"
-import { MyJobListingsPage } from "./pages/jobListings/MyJobListingsPage"
-import { JobListingOrderCompletePage } from "./pages/jobListings/JobListingOrderCompletePage"
-import { Edit } from "lucide-react"
-import { EditJobListingPage } from "./pages/jobListings/EditJobListingPage"
+import { myJobListingsRoute } from "./pages/job-listings/my-listings"
+import { jobListingOrderCompleteRoute } from "./pages/job-listings/order-complete"
+import { editJobListingRoute } from "./pages/job-listings/edit"
 
 export const routes: RouteObject[] = [
   {
@@ -37,7 +36,7 @@ export const routes: RouteObject[] = [
           {
             path: "jobs",
             children: [
-              { index: true, element: <JobListingsListPage /> },
+              { index: true, ...jobListingRoute },
               {
                 path: "new",
                 element: (
@@ -48,30 +47,26 @@ export const routes: RouteObject[] = [
               },
               {
                 path: "my-listings",
-                element: (
-                  <PrivatePage>
-                    <MyJobListingsPage />
-                  </PrivatePage>
-                ),
+                ...myJobListingsRoute,
               },
               {
                 path: "order-complete",
-                element: <JobListingOrderCompletePage />,
+                ...jobListingOrderCompleteRoute,
               },
               {
                 path: ":id/edit",
-                element: <EditJobListingPage />,
+                ...editJobListingRoute,
               },
             ],
           },
           { path: "*", element: <NotFoundPage /> },
-        ],
-      },
-      {
-        element: <AuthLayout />,
-        children: [
-          { path: "login", element: <LoginForm /> },
-          { path: "signup", element: <SignupForm /> },
+          {
+            element: <AuthLayout />,
+            children: [
+              { path: "login", element: <LoginForm /> },
+              { path: "signup", element: <SignupForm /> },
+            ],
+          },
         ],
       },
     ],

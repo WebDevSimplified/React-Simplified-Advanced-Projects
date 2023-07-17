@@ -29,6 +29,8 @@ import { jobListingFormSchema } from "@backend/constants/schemas/jobListings"
 import { useState } from "react"
 import { JobListingCard } from "./JobListingCard"
 import { JobListingFullDialog } from "./JobListingFullDialog"
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner"
+import { JobListingGrid } from ".."
 
 type JobListingFormValues = z.infer<typeof jobListingFormSchema>
 
@@ -185,23 +187,28 @@ export function JobListingForm({
             >
               {isPreviewOpen ? "Hide" : "Show"} Preview
             </Button>
-            <Button type="submit">Save</Button>
+            <Button
+              type="submit"
+              disabled={form.formState.isSubmitting || !form.formState.isValid}
+            >
+              {form.formState.isSubmitting ? <LoadingSpinner /> : "Save"}
+            </Button>
           </div>
         </form>
       </Form>
       {isPreviewOpen && (
-        <div className="max-w-[450px] mt-4">
+        <JobListingGrid>
           <JobListingCard
             {...jobListingValues}
             footerBtns={<JobListingFullDialog {...jobListingValues} />}
           />
-        </div>
+        </JobListingGrid>
       )}
     </>
   )
 }
 
-type TaskSelectFormFieldProps<T extends FieldValues> = {
+type JobListingSelectFormFieldProps<T extends FieldValues> = {
   label: string
   control: Control<T>
   name: Path<T>
@@ -213,7 +220,7 @@ function JobListingSelectFormField<T extends FieldValues>({
   control,
   name,
   options,
-}: TaskSelectFormFieldProps<T>) {
+}: JobListingSelectFormFieldProps<T>) {
   return (
     <FormField
       control={control}
