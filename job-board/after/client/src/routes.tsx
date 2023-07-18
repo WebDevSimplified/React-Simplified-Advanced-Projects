@@ -1,6 +1,5 @@
 import { Navigate, RouteObject } from "react-router-dom"
 import { RootLayout } from "@/layouts/RootLayout"
-import { NavLayout } from "@/layouts/NavLayout"
 import { ErrorPage } from "@/pages/ErrorPage"
 import { TaskListPage } from "@/pages/tasks/TaskListPage"
 import { NewTaskPage } from "@/pages/tasks/NewTaskPage"
@@ -19,7 +18,6 @@ export const routes: RouteObject[] = [
     element: <RootLayout />,
     children: [
       {
-        element: <NavLayout />,
         errorElement: <ErrorPage />,
         children: [
           {

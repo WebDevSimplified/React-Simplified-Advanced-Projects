@@ -1,6 +1,6 @@
 import { useAuth } from "@/features/authentication"
 import { Navigate, useLocation } from "react-router-dom"
-import { LoadingSpinner } from "../ui/LoadingSpinner"
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner"
 
 export function PrivatePage({ children }: { children: React.ReactNode }) {
   const { user, isLoadingUser } = useAuth()

@@ -7,10 +7,10 @@ export const baseApi = axios.create({
 })
 
 if (env.VITE_TEST_SLOW_API) {
-  baseApi.interceptors.request.use(res => {
+  baseApi.interceptors.request.use(req => {
     return new Promise(resolve => {
       setTimeout(() => {
-        resolve(res)
+        resolve(req)
       }, 1000)
     })
   })
