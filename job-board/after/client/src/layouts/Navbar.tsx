@@ -3,12 +3,16 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuSub,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAuth } from "@/features/authentication"
 import { useTheme } from "@/hooks/useTheme"
-import { ChevronDown, Moon, Sun } from "lucide-react"
+import { ChevronDown, Menu, Moon, Sun } from "lucide-react"
 import { Link, NavLink } from "react-router-dom"
 
 const LINKS = [
@@ -23,15 +27,13 @@ export function Navbar() {
     <nav className="sticky top-0 z-10 bg-white dark:bg-slate-950 border-b p-4">
       <div className="container flex items-center justify-between gap-4">
         <span className="text-lg">WDS App</span>
-        <ul className="flex">
-          <li className="flex items-center">
-            <ThemeToggleButton />
-          </li>
-          {LINKS.map(link => (
-            <NavItem key={link.to} {...link} />
-          ))}
-          {user ? (
-            <li className="flex items-center">
+        <div className="flex">
+          <ThemeToggleButton />
+          <div className="hidden sm:flex">
+            {LINKS.map(link => (
+              <NavItem key={link.to} {...link} />
+            ))}
+            {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -42,21 +44,68 @@ export function Navbar() {
                     <ChevronDown className="w-4 h-4 ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                  <DropdownMenuItem asChild>
-                    <Link to="/jobs/my-listings">My Listings</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+                <DropdownMenuContent>
+                  <LoginMenuItems logout={logout} />
                 </DropdownMenuContent>
               </DropdownMenu>
-            </li>
-          ) : (
-            <NavItem to="/login" label="Login" />
-          )}
-        </ul>
+            ) : (
+              <NavItem to="/login" label="Login" />
+            )}
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild className="block sm:hidden">
+              <Button
+                variant="ghost"
+                className="data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800"
+              >
+                <Menu className="w-4 h-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {LINKS.map(link => (
+                <DropdownMenuItem key={link.to} asChild>
+                  <NavLink to={link.to}>{link.label}</NavLink>
+                </DropdownMenuItem>
+              ))}
+              <DropdownMenuSeparator />
+              {user ? (
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger asChild>
+                    <span className="mr-auto">{user.email}</span>
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <LoginMenuItems logout={logout} />
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+              ) : (
+                <DropdownMenuItem asChild>
+                  <NavLink to="/login">Login</NavLink>
+                </DropdownMenuItem>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </nav>
+  )
+}
+
+type LoginMenuItemsProps = {
+  logout: () => void
+}
+
+function LoginMenuItems({ logout }: LoginMenuItemsProps) {
+  return (
+    <>
+      <DropdownMenuItem asChild>
+        <Link to="/jobs/my-listings">My Listings</Link>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+    </>
   )
 }
 
@@ -67,11 +116,11 @@ type NavItemProps = {
 
 function NavItem({ to, label }: NavItemProps) {
   return (
-    <li className="h-full flex items-center">
+    <div className="h-full flex">
       <Button asChild variant="ghost">
         <NavLink to={to}>{label}</NavLink>
       </Button>
-    </li>
+    </div>
   )
 }
 

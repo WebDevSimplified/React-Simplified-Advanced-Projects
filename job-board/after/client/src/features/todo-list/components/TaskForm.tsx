@@ -58,7 +58,7 @@ export function TaskForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <div className="grid gap-4 grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 grid-cols-1">
           <FormField
             control={form.control}
             name="title"

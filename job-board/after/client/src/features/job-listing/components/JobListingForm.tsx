@@ -71,7 +71,7 @@ export function JobListingForm({
               control={form.control}
               name="title"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="sm:col-span-2 lg:col-span-1">
                   <FormLabel>Title</FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -154,7 +154,7 @@ export function JobListingForm({
               control={form.control}
               name="shortDescription"
               render={({ field }) => (
-                <FormItem className="col-span-2">
+                <FormItem className="sm:col-span-2">
                   <FormLabel>Short Description</FormLabel>
                   <FormControl>
                     <Textarea {...field} />
