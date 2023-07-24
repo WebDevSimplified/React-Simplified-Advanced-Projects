@@ -22,7 +22,7 @@ export const routes: RouteObject[] = [
         children: [
           {
             index: true,
-            element: <Navigate to="/tasks" />,
+            element: <Navigate to="/jobs" />,
           },
           {
             path: "tasks",
