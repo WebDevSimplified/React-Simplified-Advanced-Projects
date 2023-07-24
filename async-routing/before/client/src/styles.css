@@ -320,8 +320,8 @@ body {
 }
 
 .skeleton-input {
-  height: 2em;
-  border: 1px solid black;
+  height: 2.25em;
+  border: 2px solid black;
 }
 
 @keyframes skeleton {
