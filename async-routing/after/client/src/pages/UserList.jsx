@@ -1,7 +1,7 @@
 import { Await, Link, defer, useLoaderData } from "react-router-dom"
 import { getUsers } from "../api/users"
 import { Suspense } from "react"
-import { Skeleton, SkeletonBtn, SkeletonList } from "../components/Skeleton"
+import { Skeleton, SkeletonButton, SkeletonList } from "../components/Skeleton"
 
 function UserList() {
   const { usersPromise } = useLoaderData()
@@ -15,21 +15,15 @@ function UserList() {
             <SkeletonList amount={6}>
               <div className="card">
                 <div className="card-header">
-                  <Skeleton inline short />
+                  <Skeleton short />
                 </div>
                 <div className="card-body">
-                  <div>
-                    <Skeleton inline short />
-                  </div>
-                  <div>
-                    <Skeleton inline short />
-                  </div>
-                  <div>
-                    <Skeleton inline short />
-                  </div>
+                  <Skeleton short />
+                  <Skeleton short />
+                  <Skeleton short />
                 </div>
                 <div className="card-footer">
-                  <SkeletonBtn />
+                  <SkeletonButton />
                 </div>
               </div>
             </SkeletonList>

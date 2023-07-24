@@ -2,15 +2,15 @@ import { Await, Link, defer, useLoaderData } from "react-router-dom"
 import { getComments } from "../api/comments"
 import { getPost } from "../api/posts"
 import { getUser } from "../api/users"
-import { Suspense } from "react"
 import {
   SimpleSkeletonText,
   Skeleton,
   SkeletonList,
 } from "../components/Skeleton"
+import { Suspense } from "react"
 
 function Post() {
-  const { commentsPromise, postPromise, getUserPromise } = useLoaderData()
+  const { commentsPromise, postPromise, userPromise } = useLoaderData()
 
   return (
     <>
@@ -27,15 +27,21 @@ function Post() {
       <span className="page-subtitle">
         By:{" "}
         <Suspense fallback={<Skeleton short inline />}>
-          <Await
-            resolve={postPromise.then(post => getUserPromise(post.userId))}
-          >
+          <Await resolve={userPromise}>
             {user => <Link to={`/users/${user.id}`}>{user.name}</Link>}
           </Await>
         </Suspense>
       </span>
       <div>
-        <Suspense fallback={<SkeletonList amount={3} />}>
+        <Suspense
+          fallback={
+            <>
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+            </>
+          }
+        >
           <Await resolve={postPromise}>{post => post.body}</Await>
         </Suspense>
       </div>
@@ -82,7 +88,7 @@ function loader({ request: { signal }, params: { postId } }) {
   return defer({
     commentsPromise: comments,
     postPromise: post,
-    getUserPromise: userId => getUser(userId, { signal }),
+    userPromise: post.then(post => getUser(post.userId, { signal })),
   })
 }
 

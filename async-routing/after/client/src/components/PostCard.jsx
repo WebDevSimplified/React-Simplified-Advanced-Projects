@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Skeleton, SkeletonBtn } from "./Skeleton"
+import { Skeleton, SkeletonButton } from "./Skeleton"
 
 export function PostCard({ id, title, body }) {
   return (
@@ -32,7 +32,7 @@ export function SkeletonPostCard() {
         </div>
       </div>
       <div className="card-footer">
-        <SkeletonBtn />
+        <SkeletonButton />
       </div>
     </div>
   )

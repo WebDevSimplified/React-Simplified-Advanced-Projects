@@ -1,8 +1,8 @@
 import { Await, defer, useLoaderData } from "react-router-dom"
 import { getTodos } from "../api/todos"
 import { TodoItem } from "../components/TodoItem"
-import { Skeleton, SkeletonList } from "../components/Skeleton"
 import { Suspense } from "react"
+import { Skeleton, SkeletonList } from "../components/Skeleton"
 
 function TodoList() {
   const { todosPromise } = useLoaderData()
@@ -13,7 +13,7 @@ function TodoList() {
       <ul>
         <Suspense
           fallback={
-            <SkeletonList amount={12}>
+            <SkeletonList amount={10}>
               <li>
                 <Skeleton short />
               </li>

@@ -20,18 +20,12 @@ function PostList() {
     searchParams: { query, userId },
   } = useLoaderData()
   const queryRef = useRef()
-  const userIdRef = useRef()
+  const { state } = useNavigation()
+  const isLoading = state === "loading"
 
   useEffect(() => {
     queryRef.current.value = query || ""
   }, [query])
-
-  useEffect(() => {
-    userIdRef.current.value = userId || ""
-  }, [userId])
-
-  const { state } = useNavigation()
-  const isLoading = state === "loading"
 
   return (
     <>
@@ -54,13 +48,7 @@ function PostList() {
             <label htmlFor="userId">Author</label>
             <Suspense
               fallback={
-                <select
-                  disabled
-                  type="search"
-                  name="userId"
-                  id="userId"
-                  ref={userIdRef}
-                >
+                <select type="search" name="userId" id="userId" disabled>
                   <option value="">Loading...</option>
                 </select>
               }
@@ -71,7 +59,7 @@ function PostList() {
                     type="search"
                     name="userId"
                     id="userId"
-                    ref={userIdRef}
+                    defaultValue={userId || ""}
                   >
                     <option value="">Any</option>
                     {users.map(user => (
@@ -113,12 +101,12 @@ async function loader({ request: { signal, url } }) {
   const filterParams = { q: query }
   if (userId !== "") filterParams.userId = userId
 
-  const postsPromise = getPosts({ signal, params: filterParams })
-  const usersPromise = getUsers({ signal })
+  const posts = getPosts({ signal, params: filterParams })
+  const users = getUsers({ signal })
 
   return defer({
-    postsPromise,
-    usersPromise,
+    postsPromise: posts,
+    usersPromise: users,
     searchParams: { query, userId },
   })
 }

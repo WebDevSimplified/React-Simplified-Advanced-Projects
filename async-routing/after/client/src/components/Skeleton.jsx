@@ -13,30 +13,27 @@ export function Skeleton({ short, inline }) {
   )
 }
 
-export function SkeletonBtn() {
-  return <div className="skeleton-btn skeleton" />
+export function SkeletonButton() {
+  return <div className="skeleton skeleton-btn" />
 }
 
 export function SkeletonInput() {
-  return <div className="skeleton-input skeleton" />
+  return <div className="skeleton skeleton-input" />
 }
 
+export function SkeletonList({ amount, children }) {
+  return (
+    <>
+      {Array.from({ length: amount }).map((_, i) => (
+        <Fragment key={i}>{children}</Fragment>
+      ))}
+    </>
+  )
+}
 export function SimpleSkeletonText({ resolve, children }) {
   return (
     <Suspense fallback={<Skeleton short inline />}>
       <Await resolve={resolve}>{children}</Await>
     </Suspense>
-  )
-}
-
-export function SkeletonList({ amount, children }) {
-  const child = children ?? <Skeleton />
-
-  return (
-    <>
-      {Array.from({ length: amount }).map((_, i) => (
-        <Fragment key={i}>{child}</Fragment>
-      ))}
-    </>
   )
 }

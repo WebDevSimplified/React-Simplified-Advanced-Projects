@@ -4,12 +4,12 @@ import { getTodos } from "../api/todos"
 import { getUser } from "../api/users"
 import { PostCard, SkeletonPostCard } from "../components/PostCard"
 import { TodoItem } from "../components/TodoItem"
-import { Suspense } from "react"
 import {
   SimpleSkeletonText,
   Skeleton,
   SkeletonList,
 } from "../components/Skeleton"
+import { Suspense } from "react"
 
 function User() {
   const { userPromise, postsPromise, todosPromise } = useLoaderData()
@@ -41,9 +41,8 @@ function User() {
       <div>
         <b>Address:</b>{" "}
         <SimpleSkeletonText resolve={userPromise}>
-          {user =>
-            `${user.address.street} ${user.address.suite} ${user.address.city} ${user.address.zipcode}`
-          }
+          {user => `${user.address.street} ${user.address.suite}
+        ${user.address.city} ${user.address.zipcode}`}
         </SimpleSkeletonText>
       </div>
 
@@ -51,7 +50,7 @@ function User() {
       <div className="card-grid">
         <Suspense
           fallback={
-            <SkeletonList amount={6}>
+            <SkeletonList amount={3}>
               <SkeletonPostCard />
             </SkeletonList>
           }
@@ -65,14 +64,14 @@ function User() {
       <ul>
         <Suspense
           fallback={
-            <SkeletonList amount={6}>
+            <SkeletonList amount={5}>
               <li>
                 <Skeleton short />
               </li>
             </SkeletonList>
           }
         >
-          <Await resolve={postsPromise}>
+          <Await resolve={todosPromise}>
             {todos => todos.map(todo => <TodoItem key={todo.id} {...todo} />)}
           </Await>
         </Suspense>
@@ -81,7 +80,7 @@ function User() {
   )
 }
 
-function loader({ request: { signal }, params: { userId } }) {
+async function loader({ request: { signal }, params: { userId } }) {
   const posts = getPosts({ signal, params: { userId } })
   const todos = getTodos({ signal, params: { userId } })
   const user = getUser(userId, { signal })

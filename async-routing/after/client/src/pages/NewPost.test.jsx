@@ -61,8 +61,8 @@ describe("NewPost page", () => {
     await user.click(screen.getByText("Save"))
 
     expect(newPostApiHandler).toHaveBeenCalledOnce()
-    expect(screen.getByText("new post")).toBeInTheDocument()
-    expect(screen.getByText("first user")).toBeInTheDocument()
+    expect(await screen.findByText("new post")).toBeInTheDocument()
+    expect(await screen.findByText("first user")).toBeInTheDocument()
     expect(screen.getByText("new post body")).toBeInTheDocument()
   })
 })

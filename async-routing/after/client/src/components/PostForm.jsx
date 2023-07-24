@@ -3,13 +3,14 @@ import { FormGroup } from "./FormGroup"
 import { Suspense } from "react"
 import { SkeletonInput } from "./Skeleton"
 
+const DEFAULT_VALUE_PROMISE = Promise.resolve({})
+
 export function PostForm({
   usersPromise,
   isSubmitting,
   errors = {},
-  defaultValuesPromise = Promise.resolve({}),
+  defaultValuesPromise = DEFAULT_VALUE_PROMISE,
 }) {
-  console.log(defaultValuesPromise)
   return (
     <Form method="post" className="form">
       <div className="form-row">
