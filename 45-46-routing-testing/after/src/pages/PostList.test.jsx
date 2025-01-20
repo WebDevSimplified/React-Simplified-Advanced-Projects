@@ -1,9 +1,10 @@
 import { describe, it, expect } from "vitest"
-import { screen } from "@testing-library/react"
-import { renderRoute } from "../../test-setup/renderRoute"
+import { render, screen } from "@testing-library/react"
 import { addMockApiRouteHandler } from "../../test-setup/mockServer"
 import { HttpResponse } from "msw"
 import userEvent from "@testing-library/user-event"
+import { postListRoute } from "./PostList"
+import { createRoutesStub } from "react-router"
 
 describe("PostList page", () => {
   it("properly filters the post list based on filter inputs", async () => {
@@ -49,7 +50,16 @@ describe("PostList page", () => {
       ])
     })
 
-    renderRoute("/posts")
+    // renderRoute("/posts")
+    // FIXME: Major changes and I don't like this way of doing things (unless we mock the loaded and then don't need msw). Either way probably redo this entire video
+    const Stub = createRoutesStub([
+      {
+        path: "/posts",
+        loader: postListRoute.loader,
+        Component: postListRoute.element.type,
+      },
+    ])
+    render(<Stub initialEntries={["/posts"]} />)
 
     expect(await screen.findByText("first post")).toBeInTheDocument()
     expect(screen.getByText("second post")).toBeInTheDocument()

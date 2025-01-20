@@ -1,9 +1,14 @@
 import { render } from "@testing-library/react"
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { RouterProvider } from "react-router/dom"
+import { createMemoryRouter } from "react-router"
 import { routes } from "../src/routes"
 
 export function renderRoute(route = "/") {
-  window.history.pushState({}, "Test Page", route)
-
-  return render(<RouterProvider router={createBrowserRouter(routes)} />)
+  return render(
+    <RouterProvider
+      router={createMemoryRouter(routes, {
+        initialEntries: [route],
+      })}
+    />
+  )
 }

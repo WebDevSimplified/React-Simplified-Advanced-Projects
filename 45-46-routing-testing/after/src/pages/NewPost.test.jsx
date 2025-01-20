@@ -1,9 +1,11 @@
 import { describe, it, expect, vi } from "vitest"
-import { screen } from "@testing-library/react"
-import { renderRoute } from "../../test-setup/renderRoute"
+import { render, screen } from "@testing-library/react"
 import { addMockApiRouteHandler } from "../../test-setup/mockServer"
 import { HttpResponse } from "msw"
 import userEvent from "@testing-library/user-event"
+import { createRoutesStub } from "react-router"
+import { newPostRoute } from "./NewPost"
+import { postRoute } from "./Post"
 
 describe("NewPost page", () => {
   it("should create a new post with valid input", async () => {
@@ -45,7 +47,21 @@ describe("NewPost page", () => {
 
     addMockApiRouteHandler("post", "/posts", newPostApiHandler)
 
-    renderRoute("/posts/new")
+    // renderRoute("/posts/new")
+    const Stub = createRoutesStub([
+      {
+        path: "/posts/new",
+        loader: newPostRoute.loader,
+        action: newPostRoute.action,
+        Component: newPostRoute.element.type,
+      },
+      {
+        path: "/posts/:postId",
+        loader: postRoute.loader,
+        Component: postRoute.element.type,
+      },
+    ])
+    render(<Stub initialEntries={["/posts/new"]} />)
 
     const titleInput = await screen.findByLabelText("Title")
     const userInput = screen.getByLabelText("Author")
