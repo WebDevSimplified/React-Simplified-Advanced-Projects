@@ -1,9 +1,4 @@
-import {
-  Link,
-  Outlet,
-  ScrollRestoration,
-  useNavigation,
-} from "react-router-dom"
+import { Link, Outlet, ScrollRestoration, useNavigation } from "react-router"
 import styled, { css } from "styled-components"
 
 const StyledNav = styled.nav`

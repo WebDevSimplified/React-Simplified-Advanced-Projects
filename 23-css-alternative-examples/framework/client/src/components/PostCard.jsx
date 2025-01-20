@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
 

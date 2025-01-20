@@ -1,4 +1,4 @@
-import { Form as RouterForm } from "react-router-dom"
+import { Form as RouterForm } from "react-router"
 
 export function Form({ className, ...props }) {
   return (

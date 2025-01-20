@@ -1,9 +1,4 @@
-import {
-  Link,
-  Outlet,
-  ScrollRestoration,
-  useNavigation,
-} from "react-router-dom"
+import { Link, Outlet, ScrollRestoration, useNavigation } from "react-router"
 import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
 import Container from "react-bootstrap/Container"

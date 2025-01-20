@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom"
+import { Link, useLoaderData } from "react-router"
 import { getUsers } from "../api/users"
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"

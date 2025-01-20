@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom"
+import { Link, useLoaderData } from "react-router"
 import { getUsers } from "../api/users"
 import { Card, CardGrid } from "../components/Card"
 import { PageHeader } from "../components/PageHeader"
