@@ -1,4 +1,4 @@
-import { Await, Form, Link } from "react-router-dom"
+import { Await, Form, Link } from "react-router"
 import { FormGroup } from "./FormGroup"
 import { Suspense } from "react"
 import { SkeletonInput } from "./Skeleton"

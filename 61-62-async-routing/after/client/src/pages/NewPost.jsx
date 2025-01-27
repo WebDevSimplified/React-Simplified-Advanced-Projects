@@ -1,10 +1,9 @@
 import {
-  defer,
   redirect,
   useActionData,
   useLoaderData,
   useNavigation,
-} from "react-router-dom"
+} from "react-router"
 import { createPost } from "../api/posts"
 import { getUsers } from "../api/users"
 import { PostForm, postFormValidator } from "../components/PostForm"
@@ -48,7 +47,7 @@ async function action({ request }) {
 }
 
 function loader({ request: { signal } }) {
-  return defer({ usersPromise: getUsers({ signal }) })
+  return { usersPromise: getUsers({ signal }) }
 }
 
 export const newPostRoute = {

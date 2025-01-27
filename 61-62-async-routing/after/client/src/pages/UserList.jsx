@@ -1,4 +1,4 @@
-import { Await, Link, defer, useLoaderData } from "react-router-dom"
+import { Await, Link, useLoaderData } from "react-router"
 import { getUsers } from "../api/users"
 import { Suspense } from "react"
 import { Skeleton, SkeletonButton, SkeletonList } from "../components/Skeleton"
@@ -55,7 +55,7 @@ function UserList() {
 }
 
 function loader({ request: { signal } }) {
-  return defer({ usersPromise: getUsers({ signal }) })
+  return { usersPromise: getUsers({ signal }) }
 }
 
 export const userListRoute = {

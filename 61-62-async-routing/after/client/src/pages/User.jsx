@@ -1,4 +1,4 @@
-import { Await, defer, useLoaderData } from "react-router-dom"
+import { Await, useLoaderData } from "react-router"
 import { getPosts } from "../api/posts"
 import { getTodos } from "../api/todos"
 import { getUser } from "../api/users"
@@ -85,7 +85,7 @@ async function loader({ request: { signal }, params: { userId } }) {
   const todos = getTodos({ signal, params: { userId } })
   const user = getUser(userId, { signal })
 
-  return defer({ postsPromise: posts, todosPromise: todos, userPromise: user })
+  return { postsPromise: posts, todosPromise: todos, userPromise: user }
 }
 
 export const userRoute = {

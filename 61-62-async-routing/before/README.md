@@ -1,6 +1,6 @@
 # Before Getting Started
 
-You will recognize this project as the routing project we have used throughout this course. This starting code specifically is exactly the same as the final code from the routing testing project. The goal of this current project is to implement asynchronous routing with `Suspense`, `defer`, and `Await`. The actual implementation of the loading animations is entirely up to you, but there are a few CSS classes already included in the `styles.css` that will help you with adding in animations.
+You will recognize this project as the routing project we have used throughout this course. This starting code specifically is exactly the same as the final code from the advanced blog project. The goal of this current project is to implement asynchronous routing with `Suspense`, and `Await`. The actual implementation of the loading animations is entirely up to you, but there are a few CSS classes already included in the `styles.css` that will help you with adding in animations.
 
 1. `skeleton` - This is the most basic class that will make the element about the same height as a piece of text, full width, and animate the opacity from 0.5 to 1. Also, if you have multiple `skeleton` elements next to each other in a container they will space out from each other and change the width of the last element to look more like a paragraph.
 2. `skeleton-btn` - This class, when combined with the `skeleton` class, will size your element to look like a button element.
@@ -32,8 +32,8 @@ If you want to see the full CSS code for these classes, you can find it below.
 }
 
 .skeleton-input {
-  height: 2em;
-  border: 1px solid black;
+  height: 2.25em;
+  border: 2px solid black;
 }
 
 @keyframes skeleton {
