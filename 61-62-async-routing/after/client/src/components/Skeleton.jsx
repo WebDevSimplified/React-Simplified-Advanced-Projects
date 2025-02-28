@@ -1,5 +1,5 @@
 import { Fragment, Suspense } from "react"
-import { Await } from "react-router-dom"
+import { Await } from "react-router"
 
 export function Skeleton({ short, inline }) {
   return (
