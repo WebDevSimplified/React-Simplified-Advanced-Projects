@@ -1,4 +1,4 @@
-import { Await, Link, defer, useLoaderData } from "react-router-dom"
+import { Await, Link, useLoaderData } from "react-router"
 import { getComments } from "../api/comments"
 import { getPost } from "../api/posts"
 import { getUser } from "../api/users"
@@ -85,11 +85,11 @@ function loader({ request: { signal }, params: { postId } }) {
   const comments = getComments(postId, { signal })
   const post = getPost(postId, { signal })
 
-  return defer({
+  return {
     commentsPromise: comments,
     postPromise: post,
     userPromise: post.then(post => getUser(post.userId, { signal })),
-  })
+  }
 }
 
 export const postRoute = {

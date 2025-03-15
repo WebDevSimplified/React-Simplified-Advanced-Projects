@@ -1,12 +1,5 @@
 import { Suspense, useEffect, useRef } from "react"
-import {
-  Await,
-  Form,
-  Link,
-  defer,
-  useLoaderData,
-  useNavigation,
-} from "react-router-dom"
+import { Await, Form, Link, useLoaderData, useNavigation } from "react-router"
 import { getPosts } from "../api/posts"
 import { getUsers } from "../api/users"
 import { FormGroup } from "../components/FormGroup"
@@ -94,7 +87,7 @@ function PostList() {
   )
 }
 
-async function loader({ request: { signal, url } }) {
+function loader({ request: { signal, url } }) {
   const searchParams = new URL(url).searchParams
   const query = searchParams.get("query")
   const userId = searchParams.get("userId")
@@ -104,11 +97,11 @@ async function loader({ request: { signal, url } }) {
   const posts = getPosts({ signal, params: filterParams })
   const users = getUsers({ signal })
 
-  return defer({
+  return {
     postsPromise: posts,
     usersPromise: users,
     searchParams: { query, userId },
-  })
+  }
 }
 
 export const postListRoute = {

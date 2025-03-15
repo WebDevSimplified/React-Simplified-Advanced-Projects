@@ -1,4 +1,4 @@
-import { Await, defer, useLoaderData } from "react-router-dom"
+import { Await, useLoaderData } from "react-router"
 import { getTodos } from "../api/todos"
 import { TodoItem } from "../components/TodoItem"
 import { Suspense } from "react"
@@ -30,7 +30,7 @@ function TodoList() {
 }
 
 function loader({ request: { signal } }) {
-  return defer({ todosPromise: getTodos({ signal }) })
+  return { todosPromise: getTodos({ signal }) }
 }
 
 export const todoListRoute = {

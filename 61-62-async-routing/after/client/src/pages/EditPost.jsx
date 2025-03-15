@@ -3,7 +3,6 @@ import {
   useActionData,
   useLoaderData,
   useNavigation,
-  defer,
 } from "react-router"
 import { getPost, updatePost } from "../api/posts"
 import { getUsers } from "../api/users"
@@ -28,11 +27,11 @@ function EditPost() {
   )
 }
 
-async function loader({ request: { signal }, params: { postId } }) {
+function loader({ request: { signal }, params: { postId } }) {
   const post = getPost(postId, { signal })
   const users = getUsers({ signal })
 
-  return defer({ postPromise: post, usersPromise: users })
+  return { postPromise: post, usersPromise: users }
 }
 
 async function action({ request, params: { postId } }) {

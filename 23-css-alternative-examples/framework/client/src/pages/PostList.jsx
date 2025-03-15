@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { Form as RouterForm, Link, useLoaderData } from "react-router-dom"
+import { Form as RouterForm, Link, useLoaderData } from "react-router"
 import { getPosts } from "../api/posts"
 import { getUsers } from "../api/users"
 import { PostCard } from "../components/PostCard"

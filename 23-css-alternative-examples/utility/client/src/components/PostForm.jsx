@@ -1,6 +1,6 @@
 import { Form, FormGroup, FormRow } from "./Form"
 import { Button } from "./Button"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 
 export function PostForm({
   users,

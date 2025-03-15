@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { Skeleton, SkeletonButton } from "./Skeleton"
 
 export function PostCard({ id, title, body }) {

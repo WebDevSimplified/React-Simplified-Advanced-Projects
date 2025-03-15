@@ -1,9 +1,4 @@
-import {
-  Link,
-  Outlet,
-  ScrollRestoration,
-  useNavigation,
-} from "react-router-dom"
+import { Link, Outlet, ScrollRestoration, useNavigation } from "react-router"
 import styles from "./RootLayout.module.css"
 
 export function RootLayout() {
